@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Melvor Idle
-// @namespace    http://tampermonkey.net/
-// @version      0.3
+// @namespace    https://github.com/Thunderkill
+// @version      0.4
 // @description  try to take over the world!
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=melvoridle.com
 // @updateURL    https://github.com/Thunderkill/melvor-idle-tools/raw/main/melvor-idle-tools.user.js
+// @downloadURL  https://github.com/Thunderkill/melvor-idle-tools/raw/main/melvor-idle-tools.user.js
 // @grant        none
 // ==/UserScript==
 
