@@ -37,6 +37,6 @@ class SettingsManager {
   }
 
   saveSettings() {
-    localStorage.setItem("botSettings", JSON.stringify(this.settings));
+    localStorage.setItem("botSettings", JSON.stringify(mvb.settings));
   }
 }
