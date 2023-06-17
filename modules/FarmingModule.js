@@ -1,6 +1,7 @@
 class FarmingModule {
-  start() {
-    mvb.pollers.push([
+  load() {
+    mvb.addPoller(
+      "FarmingModule",
       () => {
         if (!mvb.settings.autoFarm) return;
 
@@ -38,7 +39,7 @@ class FarmingModule {
           }
         });
       },
-      1000,
-    ]);
+      1000
+    );
   }
 }

@@ -1,6 +1,7 @@
 class MiningModule {
-  start() {
-    mvb.pollers.push([
+  load() {
+    mvb.addPoller(
+      "MiningModule",
       () => {
         if (!game.mining.isActive) {
           return;
@@ -25,7 +26,7 @@ class MiningModule {
           }
         }
       },
-      1000,
-    ]);
+      1000
+    );
   }
 }

@@ -1,12 +1,13 @@
 class MasteryModule {
-  start() {
+  load() {
     const dis = this;
-    mvb.pollers.push([
+    mvb.addPoller(
+      "MasteryModule",
       () => {
         game.skills.forEach(dis.levelup);
       },
-      100,
-    ]);
+      100
+    );
   }
 
   levelup(skill) {
@@ -17,7 +18,7 @@ class MasteryModule {
     }
 
     if (skill.masteryPoolProgress < masteryCheckpoints.at(-1)) {
-      //console.log("This skill doesn't have last mastery checkpoint yet!")
+      //mvb.log("This skill doesn't have last mastery checkpoint yet!")
       return;
     }
 
@@ -29,7 +30,7 @@ class MasteryModule {
 
     const progress = skill.getMasteryProgress(action);
     if (progress.level >= 99) {
-      //console.log("%s already maxed", action._localID)
+      //mvb.log("%s already maxed", action._localID)
       return;
     }
 
@@ -38,10 +39,10 @@ class MasteryModule {
     const poolTierChange = skill.getPoolBonusChange(-xpRequired);
 
     if (xpRequired <= skill.masteryPoolXP && poolTierChange === 0) {
-      console.log("Leveled up %s from %s to %s", action._localID, progress.level, nextLevel);
+      mvb.log("Leveled up %s from %s to %s", action._localID, progress.level, nextLevel);
       skill.levelUpMasteryWithPoolXP(action, 1);
     } else {
-      //console.log("We could not level up " + action._localID)
+      //mvb.log("We could not level up " + action._localID)
     }
   }
 }

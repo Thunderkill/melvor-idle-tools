@@ -9,8 +9,8 @@ class Framework {
       return;
     }
 
-    for (let poller of mvb.pollers) {
-      setInterval(...poller);
+    for (let module of mvb.modules) {
+      module.load();
     }
 
     mvb.log("Bot injected");

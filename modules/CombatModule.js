@@ -1,6 +1,7 @@
 class CombatModule {
-  start() {
-    mvb.pollers.push([
+  load() {
+    mvb.addPoller(
+      "CombatModule",
       () => {
         if (!settings.autoLoot) return;
 
@@ -8,7 +9,7 @@ class CombatModule {
           game.combat.loot.lootAll();
         }
       },
-      1000,
-    ]);
+      1000
+    );
   }
 }

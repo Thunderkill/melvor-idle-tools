@@ -1,6 +1,7 @@
 class FiremakingModule {
-  start() {
-    mvb.pollers.push([
+  load() {
+    mvb.addPoller(
+      "FiremakingModule",
       () => {
         if (!game.firemaking.isActive) {
           return;
@@ -10,7 +11,7 @@ class FiremakingModule {
           game.firemaking.lightBonfire();
         }
       },
-      1000,
-    ]);
+      1000
+    );
   }
 }

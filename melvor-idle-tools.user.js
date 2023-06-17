@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Melvor Idle
 // @namespace    https://github.com/Thunderkill
-// @version      0.8.1
+// @version      0.8.2
 // @description  Melvor Idle utilities
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php
@@ -25,9 +25,12 @@
     version: 0.2,
     settings: new SettingsManager(),
     log: (...args) => console.log("[MVB]: ", ...args),
-    pollers: [],
     modules: [new MasteryModule(), new FiremakingModule(), new CombatModule(), new FarmingModule(), new MiningModule()],
     framework: new Framework(),
+    addPoller: (name, callback, interval) => {
+      setInterval(callback, interval);
+      mvb.log("Added poller %s with a interval of %sms", name, interval);
+    },
   };
 
   mvb.settings.load();
