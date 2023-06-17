@@ -18,6 +18,7 @@
   window.mvb = {
     version: 0.2,
     settings: new SettingsManager(),
+    log: (...args) => console.log("[MVB]: ", ...args),
   };
 
   mvb.settings.load();

@@ -4,7 +4,7 @@ class SettingsManager {
     autoLoot: true,
     oreSwitch: false,
     autoFarm: true,
-    version: mvb.version,
+    version: 0,
   };
 
   load() {
