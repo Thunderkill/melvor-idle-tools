@@ -1,12 +1,4 @@
 class SettingsManager {
-  settings = {
-    autoBonfire: true,
-    autoLoot: true,
-    oreSwitch: false,
-    autoFarm: true,
-    version: 0,
-  };
-
   load() {
     const settingsItem = localStorage.getItem("botSettings");
 
@@ -34,11 +26,12 @@ class SettingsManager {
           version
         );
         localStorage.setItem("botSettings", JSON.stringify(mergedSettings));
-        settings = mergedSettings;
       }
     }
 
-    this.settings = settings;
+    for (let settingKey of Object.keys(settings)) {
+      this[settingKey] = settings[settingKey];
+    }
 
     console.log("Settings loaded with version: %s", version);
   }
