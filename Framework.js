@@ -10,7 +10,7 @@ class Framework {
     console.log("asd");
     if (!game || !game.loopStarted) {
       this.tries++;
-      if (tries % 10 === 0) {
+      if (this.tries % 10 === 0) {
         mvb.log("Waiting for game to start....");
       }
       setTimeout(this.inject, 500);
