@@ -1,49 +1,26 @@
 // ==UserScript==
 // @name         Melvor Idle
 // @namespace    https://github.com/Thunderkill
-// @version      0.5
+// @version      0.6
 // @description  try to take over the world!
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=melvoridle.com
 // @updateURL    https://github.com/Thunderkill/melvor-idle-tools/raw/main/melvor-idle-tools.user.js
 // @downloadURL  https://github.com/Thunderkill/melvor-idle-tools/raw/main/melvor-idle-tools.user.js
+// @require      https://github.com/Thunderkill/melvor-idle-tools/raw/main/settings.js
 // @grant        none
 // ==/UserScript==
 
 (function () {
   "use strict";
 
-  const version = 0.2;
-
-  const settingsItem = localStorage.getItem("botSettings");
-
-  let settings;
-
-  const defaultSettings = {
-    autoBonfire: true,
-    autoLoot: true,
-    oreSwitch: false,
-    autoFarm: true,
-    version,
+  window.mvb = {
+    version: 0.2,
+    settings: new SettingsManager(),
   };
 
-  if (!settingsItem) {
-    localStorage.setItem("botSettings", JSON.stringify(defaultSettings));
-    settings = defaultSettings;
-  } else {
-    settings = JSON.parse(settingsItem);
-    if (!settings.version || settings.version < version) {
-      const mergedSettings = { ...defaultSettings, ...settings, version };
-      console.log(
-        "Bot settings were too old (%s), replacing them with version %s",
-        settings.version ?? "no version",
-        version
-      );
-      localStorage.setItem("botSettings", JSON.stringify(mergedSettings));
-      settings = mergedSettings;
-    }
-  }
+  mvb.settings.load();
 
   function inject() {
     if (!game || !game.loopStarted) {
