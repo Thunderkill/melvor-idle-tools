@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Melvor Idle
 // @namespace    https://github.com/Thunderkill
-// @version      0.8.5
+// @version      0.8.6
 // @description  Melvor Idle utilities
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php
@@ -24,7 +24,7 @@
   window.mvb = {
     version: 0.2,
     settings: new SettingsManager(),
-    log: (...args) => console.log("[MVB]: ", ...args),
+    log: (...args) => console.log("%c[MVB]: %c%s", "color: #0080ff", "color: #FFF", ...args),
     modules: [new MasteryModule(), new FiremakingModule(), new CombatModule(), new FarmingModule(), new MiningModule()],
     framework: new Framework(),
     addPoller: (name, callback, interval) => {

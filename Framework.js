@@ -7,7 +7,6 @@ class Framework {
   tries = 0;
 
   inject() {
-    console.log("asd");
     if (!game || !game.loopStarted) {
       this.tries++;
       if (this.tries % 10 === 0) {
