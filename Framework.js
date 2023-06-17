@@ -13,7 +13,7 @@ class Framework {
       if (this.tries % 10 === 0) {
         mvb.log("Waiting for game to start....");
       }
-      setTimeout(this.inject, 500);
+      setTimeout(this.inject.bind(this), 500);
       return;
     }
 
