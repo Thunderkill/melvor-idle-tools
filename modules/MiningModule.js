@@ -1,4 +1,4 @@
-class FiremakingModule {
+class MiningModule {
   start() {
     mvb.pollers.push([
       () => {
