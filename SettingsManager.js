@@ -20,7 +20,7 @@ class SettingsManager {
       settings = JSON.parse(settingsItem);
       if (!settings.version || settings.version < version) {
         const mergedSettings = { ...defaultSettings, ...settings, version };
-        console.log(
+        mvb.log(
           "Bot settings were too old (%s), replacing them with version %s",
           settings.version ?? "no version",
           version
@@ -33,7 +33,7 @@ class SettingsManager {
       this[settingKey] = settings[settingKey];
     }
 
-    console.log("Settings loaded with version: %s", version);
+    mvb.log("Settings loaded with version: %s", version);
   }
 
   saveSettings() {
