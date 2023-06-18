@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Melvor Idle
 // @namespace    https://github.com/Thunderkill
-// @version      0.8.7
+// @version      0.9.0
 // @description  Melvor Idle utilities
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php
@@ -15,6 +15,7 @@
 // @require      https://github.com/Thunderkill/melvor-idle-tools/raw/main/modules/CombatModule.js
 // @require      https://github.com/Thunderkill/melvor-idle-tools/raw/main/modules/FarmingModule.js
 // @require      https://github.com/Thunderkill/melvor-idle-tools/raw/main/modules/MiningModule.js
+// @require      https://github.com/Thunderkill/melvor-idle-tools/raw/main/modules/TownshipModule.js
 // @grant        none
 // ==/UserScript==
 
@@ -25,7 +26,14 @@
     version: 0.2,
     settings: new SettingsManager(),
     log: (...args) => console.log("%c[MVB]: %c%s", "color: #0080ff", "color: #FFF", ...args),
-    modules: [new MasteryModule(), new FiremakingModule(), new CombatModule(), new FarmingModule(), new MiningModule()],
+    modules: [
+      new MasteryModule(),
+      new FiremakingModule(),
+      new CombatModule(),
+      new FarmingModule(),
+      new MiningModule(),
+      new TownshipModule(),
+    ],
     framework: new Framework(),
     addPoller: (name, callback, interval) => {
       setInterval(callback, interval);
