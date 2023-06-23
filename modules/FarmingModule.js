@@ -10,7 +10,20 @@ class FarmingModule {
         game.farming.plots.allObjects.forEach((plot) => {
           switch (plot.state) {
             case 1:
-              if (plot.compostLevel != 100 && game.bank.hasItem(compost)) {
+              if (plot.compostLevel != 100) {
+                if (!game.bank.hasItem(compost) || game.bank.items.get(compost).quantity < 10) {
+                  const purchase = game.shop.getQuickBuyPurchase(compost);
+                  const costs = game.shop.getPurchaseCosts(purchase, 10);
+                  if (costs.checkIfOwned()) {
+                    const oldQuantity = game.shop.buyQuantity;
+                    game.shop.buyQuantity = 10;
+                    game.shop.buyItemOnClick(purchase, true);
+                    game.shop.buyQuantity = oldQuantity;
+                    mvb.log("Bought 10 compost for %s", costs.gp);
+                  } else {
+                    mvb.log("We don't have enough coins to purchase compost!");
+                  }
+                }
                 mvb.log("Trying to compost %s", plot._localID);
                 game.farming.compostPlot(plot, compost, Infinity);
               }
