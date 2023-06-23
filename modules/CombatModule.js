@@ -11,7 +11,7 @@ class CombatModule {
         if (
           mvb.settings.jumpToSlayerTask &&
           game.combat.slayerTask.active &&
-          game.combat.enemy.monster._localID !== game.combat.slayerTask.monster._localID
+          game.combat.selectedMonster._localID !== game.combat.slayerTask.monster._localID
         ) {
           game.combat.slayerTask.jumpToTaskOnClick();
         }
