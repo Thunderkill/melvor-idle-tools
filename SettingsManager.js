@@ -10,6 +10,7 @@ class SettingsManager {
       autoLoot: true,
       oreSwitch: false,
       autoFarm: true,
+      jumpToSlayerTask: true,
       version,
     };
 
