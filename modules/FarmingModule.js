@@ -27,6 +27,7 @@ class FarmingModule {
                 mvb.log("Trying to compost %s", plot._localID);
                 game.farming.compostPlot(plot, compost, Infinity);
               }
+              const method = mvb.settings.farmMethod;
               const recipes = game.farming.categoryRecipeMap.get(plot.category);
               const bestRecipe = recipes
                 .filter(
@@ -34,7 +35,19 @@ class FarmingModule {
                     recipe.level <= game.farming.level &&
                     game.farming.getOwnedRecipeSeeds(recipe) >= recipe.seedCost.quantity
                 )
-                .sort((a, b) => b.level - a.level)[0];
+                .sort((a, b) => {
+                  // Highest level first
+                  if (method === "best") {
+                    return b.level - a.level;
+                  }
+                  // Lowest mastery level first
+                  if (method === "mastery") {
+                    const aMastery = game.farming.actionMastery.get(a);
+                    const bMastery = game.farming.actionMastery.get(b);
+                    return aMastery.xp - bMastery.xp;
+                  }
+                  return b.level - a.level;
+                })[0];
               if (!bestRecipe) return;
               mvb.log("Trying to plant %s on %s (%O) (%O)", bestRecipe._localID, plot._localID, bestRecipe, plot);
               game.farming.plantRecipe(bestRecipe, plot);

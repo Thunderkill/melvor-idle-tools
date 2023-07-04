@@ -11,6 +11,7 @@ class SettingsManager {
       oreSwitch: false,
       autoFarm: true,
       jumpToSlayerTask: true,
+      farmMethod: "best", // "best" | "mastery"
       version,
     };
 
