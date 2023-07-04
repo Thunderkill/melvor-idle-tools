@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Melvor Idle
 // @namespace    https://github.com/Thunderkill
-// @version      0.11.0
+// @version      0.11.1
 // @description  Melvor Idle utilities
 // @author       Thunderr
 // @match        https://melvoridle.com/index_game.php

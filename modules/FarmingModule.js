@@ -94,10 +94,10 @@ class FarmingModule {
         }
 
         if (changedWeapon) {
-          mvb.log("Equipping back %s", oldCape._localID);
+          mvb.log("Equipping back %s", oldWeapon._localID);
           game.combat.player.equipCallback(oldWeapon, "Weapon", 1);
-          if (oldWeapon !== oldOffhand) {
-            mvb.log("Equipping back %s", oldCape._localID);
+          if (oldWeapon !== oldOffhand && oldOffhand !== game.combat.player.equipment.slots.Shield.emptyItem) {
+            mvb.log("Equipping back %s", oldOffhand._localID);
             game.combat.player.equipCallback(oldOffhand, "Shield", 1);
           }
         }
