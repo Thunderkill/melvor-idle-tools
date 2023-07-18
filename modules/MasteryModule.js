@@ -22,11 +22,15 @@ class MasteryModule {
       return;
     }
 
-    let action = skill.actions.allObjects.sort((a, b) => {
-      const aProgress = skill.getMasteryProgress(a);
-      const bProgress = skill.getMasteryProgress(b);
-      return aProgress.level - bProgress.level;
-    })[0];
+    let action = skill.actions.allObjects
+      .filter((x) => skill.getMasteryProgress(x).level !== 99)
+      .sort((a, b) => {
+        const aProgress = skill.getMasteryProgress(a);
+        const bProgress = skill.getMasteryProgress(b);
+        return aProgress.nextLevelXP - aProgress.xp - (bProgress.nextLevelXP - bProgress.xp);
+      })[0];
+
+    if (!action) return;
 
     const progress = skill.getMasteryProgress(action);
     if (progress.level >= 99) {
