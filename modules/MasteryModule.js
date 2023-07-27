@@ -42,9 +42,15 @@ class MasteryModule {
     const xpRequired = exp.level_to_xp(nextLevel) - progress.xp + 1;
     const poolTierChange = skill.getPoolBonusChange(-xpRequired);
 
+    const currentXP = this.getMasteryXP(action);
+    const nextXP = exp.level_to_xp(nextLevel) + 1;
+    const xpToAdd = nextXP - currentXP;
+    if (skill.masteryPoolXP < xpToAdd) return;
+
     if (xpRequired <= skill.masteryPoolXP && (poolTierChange === 0 || skill.masteryPoolProgress >= 100)) {
       mvb.log("Leveled up %s from %s to %s", action._localID, progress.level, nextLevel);
-      skill.levelUpMasteryWithPoolXP(action, 1);
+      //skill.levelUpMasteryWithPoolXP(action, 1);
+      skill.exchangePoolXPForActionXP(action, xpToAdd);
     } else {
       //mvb.log("We could not level up " + action._localID)
     }
