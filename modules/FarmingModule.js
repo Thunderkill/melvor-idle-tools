@@ -16,7 +16,11 @@ class FarmingModule {
         let changedWeapon = false;
 
         // If we are going to do farming stuff then equip the set and do them
-        if (game.farming.plots.allObjects.filter((x) => x.level <= game.farming.level).some((x) => x.state !== 2)) {
+        if (
+          game.farming.plots.allObjects
+            .filter((x) => x.level <= game.farming.level)
+            .some((x) => x.state !== 2 && x.state !== 0)
+        ) {
           if (game.combat.player.equipment.slots.Cape.item !== cape) {
             mvb.log("Equipping Farming skillcape");
             game.combat.player.equipCallback(cape, "Cape", 1);
@@ -31,6 +35,8 @@ class FarmingModule {
 
         game.farming.plots.allObjects.forEach((plot) => {
           switch (plot.state) {
+            case 0:
+              break;
             case 1:
               if (plot.compostLevel != 100) {
                 if (!game.bank.hasItem(compost) || game.bank.items.get(compost).quantity < 10) {
