@@ -7,7 +7,9 @@ class FarmingModule {
 
         const compost = game.items.composts.getObjectByID("melvorD:Compost");
         const rake = game.items.equipment.getObjectByID("melvorD:Bobs_Rake");
-        const cape = game.items.equipment.getObjectByID("melvorD:Farming_Skillcape");
+        const skillCape = game.items.equipment.getObjectByID("melvorD:Farming_Skillcape");
+        const superiorSkillCape = game.items.equipment.getObjectByID("melvorTotH:Superior_Farming_Skillcape");
+        const capes = [superiorSkillCape, skillCape];
 
         const oldCape = game.combat.player.equipment.slots.Cape.item;
         const oldWeapon = game.combat.player.equipment.slots.Weapon.item;
@@ -21,12 +23,16 @@ class FarmingModule {
             .filter((x) => x.level <= game.farming.level)
             .some((x) => x.state !== 2 && x.state !== 0)
         ) {
-          if (game.combat.player.equipment.slots.Cape.item !== cape) {
-            mvb.log("Equipping Farming skillcape");
-            game.combat.player.equipCallback(cape, "Cape", 1);
-            changedCape = true;
+          if (!capes.includes(game.combat.player.equipment.slots.Cape.item)) {
+            for (let cape of capes) {
+              if (!game.bank.hasItem(cape)) continue;
+              mvb.log(`Equipping ${cape.name}`);
+              game.combat.player.equipCallback(cape, "Cape", 1);
+              changedCape = true;
+              break;
+            }
           }
-          if (game.combat.player.equipment.slots.Weapon.item !== rake) {
+          if (game.combat.player.equipment.slots.Weapon.item !== rake && game.bank.hasItem(rake)) {
             mvb.log("Equipping Bob's rake");
             game.combat.player.equipCallback(rake, "Weapon", 1);
             changedWeapon = true;
