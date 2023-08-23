@@ -25,6 +25,16 @@ class CombatModule {
             game.combat.slayerTask.selectTask(game.combat.slayerTask.tier, true, true, true);
           }
         }
+
+        // Skip task if unwanted mob
+        if (
+          game.combat.slayerTask &&
+          game.combat.slayerTask.active &&
+          mvb.settings.skipSlayerMonsters.includes(game.combat.slayerTask.monster.name)
+        ) {
+          mvb.log("Skipping slayer mob as we ignore it");
+          game.combat.slayerTask.selectTask(game.combat.slayerTask.tier, true, true, true);
+        }
       },
       1000
     );

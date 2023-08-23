@@ -12,6 +12,7 @@ class SettingsManager {
       autoFarm: true,
       jumpToSlayerTask: true,
       farmMethod: "best", // "best" | "mastery"
+      skipSlayerMonsters: [],
       version,
     };
 
