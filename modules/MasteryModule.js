@@ -14,10 +14,13 @@ class MasteryModule {
     if (!skill.hasMastery) return;
 
     let masteryPoolProgress = skill.getMasteryPoolProgress(skill.currentRealm);
-    let masteryToken = skill.masteryTokens.get(skill.currentRealm)[0];
+    let masteryTokens = skill.masteryTokens.get(skill.currentRealm);
 
-    if (masteryPoolProgress < 100 - 0.2) {
-      game.bank.claimItemOnClick(masteryToken, Infinity);
+    if (masteryTokens.length > 0) {
+
+      if (masteryPoolProgress < 100 - 0.2) {
+        game.bank.claimItemOnClick(masteryTokens[0], Infinity);
+      }
     }
 
     if (masteryPoolProgress < skill.masteryPoolBonuses.get(skill.currentRealm).at(-1)) {
