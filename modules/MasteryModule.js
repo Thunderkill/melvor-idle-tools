@@ -24,12 +24,12 @@ class MasteryModule {
     }
 
     if (masteryPoolProgress < skill.masteryPoolBonuses.get(skill.currentRealm).at(-1)) {
-      //mvb.log("This skill doesn't have last mastery checkpoint yet!")
+      mvb.log("This skill doesn't have last mastery checkpoint yet!")
       return;
     }
 
     let action = skill.actions.allObjects
-      .filter((x) => skill.getMasteryProgress(x).level !== 99)
+      .filter((x) => skill.getMasteryProgress(x).level !== 99 && x.realm === skill.currentRealm)
       .sort((a, b) => {
         const aProgress = skill.getMasteryProgress(a);
         const bProgress = skill.getMasteryProgress(b);
@@ -40,7 +40,7 @@ class MasteryModule {
 
     const progress = skill.getMasteryProgress(action);
     if (progress.level >= 99) {
-      //mvb.log("%s already maxed", action._localID)
+      mvb.log("%s already maxed", action._localID)
       return;
     }
 
@@ -48,12 +48,13 @@ class MasteryModule {
     const xpRequired = exp.level_to_xp(nextLevel) - progress.xp + 1;
     const poolTierChange = skill.getPoolBonusChange(skill.currentRealm, -xpRequired);
 
-    if (xpRequired <= skill.masteryPoolXP && (poolTierChange === 0 || masteryPoolProgress >= 100)) {
+    if (xpRequired <= skill.getMasteryPoolXP(skill.currentRealm) && (poolTierChange === 0 || masteryPoolProgress >= 100)) {
       mvb.log("Leveled up %s from %s to %s", action._localID, progress.level, nextLevel);
       //skill.levelUpMasteryWithPoolXP(action, 1);
       skill.exchangePoolXPForActionXP(action, xpRequired);
     } else {
       //mvb.log("We could not level up " + action._localID)
+      //mvb.log(xpRequired, action)
     }
   }
 }
